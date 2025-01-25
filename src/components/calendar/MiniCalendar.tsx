@@ -22,9 +22,9 @@ export const MiniCalendar = ({
   const daysInMonth = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth() + 1, 0).getDate();
 
   return (
-    <div className="p-4 md:p-6">
+    <div className="p-2 md:p-4">
       <div className="flex items-center justify-between mb-4">
-        <div className="text-lg font-semibold text-gray-900">
+        <div className="text-sm md:text-lg font-semibold text-gray-900">
           {currentStoreDate.toLocaleString('default', { month: 'long', year: 'numeric' }).replace(/^\w/, (c) => c.toUpperCase())}
         </div>
         <div className="flex gap-1">
@@ -42,14 +42,14 @@ export const MiniCalendar = ({
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-7 gap-1 text-center text-sm mb-2">
-        {["D", "L", "M", "M", "J", "V", "S"].map((day) => (
+      <div className="grid grid-cols-7 gap-0.5 md:gap-1 text-center text-sm mb-1 md:mb-2">
+        {["D", "L", "M", "W", "J", "V", "S"].map((day) => (
           <div key={day} className="text-gray-500 font-medium">
             {day}
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-7 gap-1 text-center text-sm">
+      <div className="grid grid-cols-7 gap-0.5 md:gap-1 text-center text-xs md:text-sm">
         {Array.from({ length: firstDay }).map((_, i) => (
           <div key={`empty-${i}`} className="aspect-square"></div>
         ))}

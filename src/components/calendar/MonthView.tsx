@@ -16,13 +16,13 @@ export const MonthView = ({ currentStoreDate, events, onDayClick, onEventClick }
   return (
     <>
       <div className="grid grid-cols-7 mb-2 md:mb-4">
-        {["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"].map((day) => (
-          <div key={day} className="text-xs md:text-sm lg:text-base font-semibold text-gray-600 text-center py-2 md:py-4">
+        {["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"].map((day) => (
+          <div key={day} className="text-[10px] md:text-sm lg:text-base font-semibold text-gray-600 text-center py-1 md:py-2">
             {day}
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-7 gap-1 md:gap-2 lg:gap-4">
+      <div className="grid grid-cols-7 gap-0.5 md:gap-2 lg:gap-4">
         {Array.from({ length: firstDay }).map((_, i) => (
           <div key={`empty-${i}`} className="aspect-square"></div>
         ))}
