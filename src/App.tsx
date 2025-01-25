@@ -41,7 +41,7 @@ export default function App() {
   } = useCalendar();
 
   const handleDayClick = (day: number) => {
-    const dayEvents = events.filter(event => {
+    const dayEvents = events.filter((event: Event) => {
       const eventDate = new Date(event.date);
       const targetDate = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth(), day);
       return eventDate.toDateString() === targetDate.toDateString();
@@ -125,7 +125,7 @@ export default function App() {
                   {currentStoreDate.toLocaleString('es-ES', { 
                     month: 'long', 
                     year: 'numeric' 
-                  }).replace(/^\w/, (c) => c.toUpperCase())}
+                  }).replace(/^\w/, (c: string) => c.toUpperCase())}
                 </h2>
               </div>
               <div className="px-4 md:px-6 lg:px-8">

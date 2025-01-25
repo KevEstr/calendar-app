@@ -15,7 +15,7 @@ export const calendarSlice = createSlice({
   name: 'calendar',
   initialState,
   reducers: {
-    addEvent: (state, action: PayloadAction<Event>) => {
+    addEvent: (state: CalendarState, action: PayloadAction<Event>) => {
       // Convert date strings back to Date objects
       const newEvent = {
         ...action.payload,
@@ -37,16 +37,16 @@ export const calendarSlice = createSlice({
         throw new Error('Event overlap')
       }
     },
-    updateEvent: (state, action: PayloadAction<Event>) => {
+    updateEvent: (state: CalendarState, action: PayloadAction<Event>) => {
       const index = state.events.findIndex(e => e.id === action.payload.id)
       if (index !== -1) {
         state.events[index] = action.payload
       }
     },
-    deleteEvent: (state, action: PayloadAction<string>) => {
+    deleteEvent: (state: CalendarState, action: PayloadAction<string>) => {
       state.events = state.events.filter(e => e.id !== action.payload)
     },
-    setCurrentDate: (state, action: PayloadAction<Date>) => {
+    setCurrentDate: (state: CalendarState, action: PayloadAction<Date>) => {
       state.currentDate = action.payload
     }
   }

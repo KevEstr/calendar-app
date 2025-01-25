@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit'
-import calendarReducer from './calendarSlice'
+import { configureStore } from '@reduxjs/toolkit';
+import calendarReducer from './calendarSlice';
 
 export const store = configureStore({
   reducer: {
@@ -7,9 +7,9 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false // Allow Date objects
+      serializableCheck: false
     })
-})
+});
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
