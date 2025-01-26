@@ -19,6 +19,7 @@ export default function App() {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedDayEvents, setSelectedDayEvents] = useState<Event[]>([]);
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const {
     events,
@@ -118,6 +119,9 @@ export default function App() {
             onEventClick={handleEditEvent}
             onPrevMonth={handlePrevMonth}
             onNextMonth={handleNextMonth}
+            setShowDatePicker={setShowDatePicker}
+            setIsModalOpen={setIsModalOpen}
+            resetForm={resetForm}
           />
 
           <div className="flex-1">
@@ -158,23 +162,27 @@ export default function App() {
           </div>
         </div>
 
-      <EventModal
-        isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-          resetForm();
-        }}
-        selectedDate={selectedDate}
-        selectedEvent={selectedEvent}
-        formData={formData}
-        setFormData={setFormData}
-        onSubmit={() => {
-          if (handleSubmit(selectedDate!)) {
+        <EventModal
+          isOpen={isModalOpen}
+          onClose={() => {
             setIsModalOpen(false);
-          }
-        }}
-        onDelete={handleDeleteEvent}
-      />
+            setShowDatePicker(false);
+            resetForm();
+          }}
+          selectedDate={selectedDate}
+          selectedEvent={selectedEvent}
+          formData={formData}
+          setFormData={setFormData}
+          showDatePicker={showDatePicker}
+          setSelectedDate={setSelectedDate}
+          onSubmit={() => {
+            if (handleSubmit(selectedDate!)) {
+              setIsModalOpen(false);
+              setShowDatePicker(false);
+            }
+          }}
+          onDelete={handleDeleteEvent}
+        />
 
       <EventPreview
         isOpen={isPreviewOpen}

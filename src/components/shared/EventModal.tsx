@@ -22,7 +22,10 @@ interface EventModalProps {
   }) => void;
   onSubmit: () => void;
   onDelete: (id: string) => void;
+  showDatePicker: boolean;
+  setSelectedDate: (date: Date) => void;
 }
+
 
 export const EventModal = ({
   isOpen,
@@ -32,16 +35,18 @@ export const EventModal = ({
   formData,
   setFormData,
   onSubmit,
-  onDelete
+  onDelete,
+  showDatePicker,
+  setSelectedDate
 }: EventModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 backdrop-blur-sm">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
-        <div className="flex items-center justify-between p-6 border-b">
+        <div className="flex items-center justify-between p-3 border-b">
           <h2 className="text-xl font-semibold">
-            {selectedEvent ? 'Edit Event' : 'Nuevo Evento'} - {selectedDate?.toLocaleDateString()}
+            {selectedEvent ? 'Editar Evento' : 'Nuevo Evento'} - {selectedDate?.toLocaleDateString()}
           </h2>
           <button
             onClick={onClose}
@@ -50,17 +55,32 @@ export const EventModal = ({
             <X className="w-5 h-5" />
           </button>
         </div>
-        <div className="p-6 space-y-6">
+        <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           <div>
-            <label className="block text-sm font-medium mb-2">Título</label>
+          <label className="block text-sm font-medium mb-1">Título</label>
             <input
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({...formData, title: e.target.value})}
-              className="w-full px-4 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-1.5 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Añade un título"
             />
           </div>
+
+          {showDatePicker && (
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Fecha
+              </label>
+              <input
+                type="date"
+                className="w-full p-2 border rounded-md"
+                value={selectedDate ? selectedDate.toISOString().split('T')[0] : ''}
+                onChange={(e) => setSelectedDate(new Date(e.target.value))}
+              />
+            </div>
+          )}
+
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium mb-2">Hora inicio</label>
@@ -86,8 +106,8 @@ export const EventModal = ({
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({...formData, description: e.target.value})}
-              className="w-full px-4 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-              rows={3}
+              className="w-full px-3 py-1.5 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              rows={2}
               placeholder="Añade una descripción"
             />
           </div>
@@ -106,26 +126,27 @@ export const EventModal = ({
             </div>
           </div>
         </div>
-        <div className="flex justify-end gap-3 p-6 bg-gray-50 rounded-b-xl">
+        <div className="flex justify-end gap-3 p-3 bg-gray-50 rounded-b-xl">
+
           {selectedEvent && (
             <button
               onClick={() => onDelete(selectedEvent.id)}
               className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
             >
-              Delete
+              Eliminar
             </button>
           )}
           <button
             onClick={onClose}
             className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            Cancel
+            Cancelar
           </button>
           <button
             onClick={onSubmit}
             className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            {selectedEvent ? 'Update' : 'Save'}
+            {selectedEvent ? 'Actualizar' : 'Guardar'}
           </button>
         </div>
       </div>

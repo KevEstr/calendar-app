@@ -11,7 +11,11 @@ interface MiniCalendarProps {
   onNextMonth: () => void;
   isCollapsed?: boolean;
   onToggle?: () => void;
+  setShowDatePicker: (show: boolean) => void;
+  setIsModalOpen: (open: boolean) => void;
+  resetForm: () => void;
 }
+
 
 export const MiniCalendar = ({ 
   currentStoreDate, 
@@ -20,7 +24,10 @@ export const MiniCalendar = ({
   onPrevMonth, 
   onNextMonth,
   isCollapsed = false,
-  onToggle
+  onToggle,
+  setShowDatePicker,
+  setIsModalOpen,
+  resetForm
 }: MiniCalendarProps) => {
   const firstDay = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth(), 1).getDay();
   const daysInMonth = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth() + 1, 0).getDate();
@@ -66,6 +73,19 @@ export const MiniCalendar = ({
           </button>
         </div>
       </div>
+
+      <button
+        onClick={() => {
+          setShowDatePicker(true); // Necesitarás pasar esta función como prop
+          setIsModalOpen(true); // Necesitarás pasar esta función como prop
+          resetForm(); // Necesitarás pasar esta función como prop
+          
+        }}
+        className="w-full mb-4 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+      >
+        Crear evento rápido
+      </button>
+
       <div className="grid grid-cols-7 gap-0.5 md:gap-1 text-center text-sm mb-1 md:mb-2">
         {["D", "L", "M", "W", "J", "V", "S"].map((day) => (
           <div key={day} className="text-gray-500 font-medium">

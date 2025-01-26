@@ -55,16 +55,16 @@ export const WeekView = ({
             <div key={dayIndex} className="bg-white rounded-lg shadow-sm">
               {/* Day header */}
               <div className="sticky top-0 bg-white p-3 border-b text-center">
-  <div className="font-medium text-gray-900">
-    <span className="block md:hidden">
-      {currentDay.toLocaleDateString('es-ES', { weekday: 'narrow' })}
-    </span>
-    <span className="hidden md:block">
-      {currentDay.toLocaleDateString('es-ES', { weekday: 'long' })}
-    </span>
-  </div>
-  <div className="text-sm text-gray-500">{day}</div>
-</div>
+                <div className="font-medium text-gray-900">
+                  <span className="block md:hidden">
+                    {currentDay.toLocaleDateString('es-ES', { weekday: 'narrow' })}
+                  </span>
+                  <span className="hidden md:block">
+                    {currentDay.toLocaleDateString('es-ES', { weekday: 'long' })}
+                  </span>
+                </div>
+                <div className="text-sm text-gray-500">{day}</div>
+              </div>
               
               {/* Time slots */}
               <div className="divide-y divide-gray-100">
@@ -78,7 +78,7 @@ export const WeekView = ({
                   return (
                     <div 
                       key={hour} 
-                      className={`p-2 transition-colors ${
+                      className={`p-2 transition-colors flex flex-col items-center ${
                         hourEvents.length > 0 
                           ? 'bg-blue-50 hover:bg-blue-100' 
                           : 'hover:bg-gray-50'

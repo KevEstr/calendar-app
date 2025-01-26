@@ -11,6 +11,9 @@ interface SidebarProps {
   onEventClick: (event: Event) => void;
   onPrevMonth: () => void;
   onNextMonth: () => void;
+  setShowDatePicker: (show: boolean) => void;
+  setIsModalOpen: (open: boolean) => void;
+  resetForm: () => void;
 }
 
 export const Sidebar = ({
@@ -20,7 +23,10 @@ export const Sidebar = ({
   onDayClick,
   onEventClick,
   onPrevMonth,
-  onNextMonth
+  onNextMonth,
+  setShowDatePicker,
+  setIsModalOpen,
+  resetForm
 }: SidebarProps) => {
 const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
   return (
@@ -37,6 +43,9 @@ const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
         onNextMonth={onNextMonth}
         isCollapsed={isCalendarCollapsed}
         onToggle={() => setIsCalendarCollapsed(!isCalendarCollapsed)}
+        setShowDatePicker={setShowDatePicker}
+        setIsModalOpen={setIsModalOpen}
+        resetForm={resetForm}
       />
 
       <div className="p-4 md:p-6 border-t border-gray-100">

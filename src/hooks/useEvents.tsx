@@ -36,7 +36,7 @@ export const useEvents = () => {
     }
 
     if (formData.startTime >= formData.endTime) {
-      alert('La fecha de fin debe ser posterior a la fecha de inicio');
+      alert('La hora de finalización debe ser posterior a la hora de inicio');
       return;
     }
 
