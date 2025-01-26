@@ -10,6 +10,8 @@ import { EventModal } from "./components/shared/EventModal";
 import { EventPreview } from "./components/shared/EventPreview";
 import { Event } from './types/Event';
 import "./App.css";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 
 export default function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -120,21 +122,41 @@ export default function App() {
 
           <div className="flex-1">
             <main className="bg-white rounded-lg shadow-sm overflow-hidden">
-              <div className="text-center py-6 md:py-8 border-b">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
-                  {currentStoreDate.toLocaleString('es-ES', { 
-                    month: 'long', 
-                    year: 'numeric' 
-                  }).replace(/^\w/, (c: string) => c.toUpperCase())}
-                </h2>
-              </div>
-              <div className="px-4 md:px-6 lg:px-8">
-                <div className="pb-6 md:pb-8 lg:pb-10">{renderView()}</div>
-              </div>
-            </main>
+            <div className="text-center py-6 md:py-8 border-b">
+              <div className="flex items-center justify-center gap-4">
+                <div className="flex gap-1">
+                  <button 
+                    onClick={handlePrevMonth}
+                    className="p-1 hover:bg-gray-100 rounded"
+                  >
+                    <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-gray-600" />
+                  </button>
+
+                </div>
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+                      {currentStoreDate.toLocaleString('es-ES', { 
+                        month: 'long', 
+                        year: 'numeric' 
+                      }).replace(/^\w/, (c: string) => c.toUpperCase())}
+                    </h2>
+
+                    <button 
+                      onClick={handleNextMonth}
+                      className="p-2 hover:bg-gray-100 rounded-full"
+                    >
+                      <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-gray-600" />
+                    </button>
+
+                  </div>
+                  
+                </div>
+                <div className="px-4 md:px-6 lg:px-8">
+                  <div className="pb-6 md:pb-8 lg:pb-10">{renderView()}</div>
+                </div>
+              </main>
+            </div>
           </div>
         </div>
-      </div>
 
       <EventModal
         isOpen={isModalOpen}

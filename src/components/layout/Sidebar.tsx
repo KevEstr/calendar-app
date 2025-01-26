@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Event } from '../../types/Event';
 import { MiniCalendar } from '../calendar/MiniCalendar';
 import { getUpcomingEvents } from '../../utils/eventHelpers';
@@ -21,6 +22,7 @@ export const Sidebar = ({
   onPrevMonth,
   onNextMonth
 }: SidebarProps) => {
+const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
   return (
     <aside
       className={`${
@@ -33,6 +35,8 @@ export const Sidebar = ({
         onDayClick={onDayClick}
         onPrevMonth={onPrevMonth}
         onNextMonth={onNextMonth}
+        isCollapsed={isCalendarCollapsed}
+        onToggle={() => setIsCalendarCollapsed(!isCalendarCollapsed)}
       />
 
       <div className="p-4 md:p-6 border-t border-gray-100">

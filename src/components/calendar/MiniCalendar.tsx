@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
 import { getDaysWithEvents } from '../../utils/eventHelpers';
 import { isToday } from '../../utils/dateHelpers';
 import { Event } from '../../types/Event';
@@ -9,6 +9,8 @@ interface MiniCalendarProps {
   onDayClick: (day: number) => void;
   onPrevMonth: () => void;
   onNextMonth: () => void;
+  isCollapsed?: boolean;
+  onToggle?: () => void;
 }
 
 export const MiniCalendar = ({ 
@@ -16,12 +18,33 @@ export const MiniCalendar = ({
   events, 
   onDayClick, 
   onPrevMonth, 
-  onNextMonth 
+  onNextMonth,
+  isCollapsed = false,
+  onToggle
 }: MiniCalendarProps) => {
   const firstDay = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth(), 1).getDay();
   const daysInMonth = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth() + 1, 0).getDate();
 
   return (
+
+    <div className="border-b border-gray-200">
+      <button 
+        onClick={onToggle}
+        className="w-full flex items-center justify-between p-4 md:hidden"
+      >
+        <div className="flex items-center gap-2">
+          <Calendar className="w-4 h-4 text-gray-500" />
+          <span className="text-sm font-medium">Vista rápida del calendario</span>
+        </div>
+        {isCollapsed ? (
+          <ChevronDown className="w-4 h-4 text-gray-500" />
+        ) : (
+          <ChevronUp className="w-4 h-4 text-gray-500" />
+        )}
+      </button>
+
+    <div className={`${isCollapsed ? 'hidden' : 'block'} md:block`}></div>
+
     <div className="p-2 md:p-4">
       <div className="flex items-center justify-between mb-4">
         <div className="text-sm md:text-lg font-semibold text-gray-900">
@@ -71,6 +94,7 @@ export const MiniCalendar = ({
           );
         })}
       </div>
+    </div>
     </div>
   );
 };
