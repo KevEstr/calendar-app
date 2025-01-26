@@ -42,7 +42,7 @@ export const WeekView = ({
       </div>
   
       {/* Week grid - optimize for mobile */}
-      <div className="grid grid-cols-3 md:grid-cols-7 gap-4 md:gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-7 gap-4 md:gap-2">
         {weeks[selectedWeek].map((day, dayIndex) => {
           if (!day) return null;
           
