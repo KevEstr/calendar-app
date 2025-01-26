@@ -11,7 +11,7 @@ import { EventPreview } from "./components/shared/EventPreview";
 import { Event } from './types/Event';
 import "./App.css";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
+import { useHolidays } from './hooks/useHolidays';
 
 export default function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -68,6 +68,7 @@ export default function App() {
           <MonthView
             currentStoreDate={currentStoreDate}
             events={events}
+            holidays={holidays}
             onDayClick={handleDayClick}
             onEventClick={handleEditEvent}
           />
@@ -98,6 +99,8 @@ export default function App() {
     }
   };
 
+  const holidays = useHolidays(currentStoreDate.getFullYear());
+
   return (
     <div className="min-h-screen bg-gray-100">
       <Header
@@ -111,18 +114,19 @@ export default function App() {
 
       <div className="max-w-7xl mx-auto mt-6 px-4 md:px-6">
         <div className="flex flex-col md:flex-row gap-6">
-          <Sidebar
-            isOpen={isSidebarOpen}
-            currentStoreDate={currentStoreDate}
-            events={events}
-            onDayClick={handleDayClick}
-            onEventClick={handleEditEvent}
-            onPrevMonth={handlePrevMonth}
-            onNextMonth={handleNextMonth}
-            setShowDatePicker={setShowDatePicker}
-            setIsModalOpen={setIsModalOpen}
-            resetForm={resetForm}
-          />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          currentStoreDate={currentStoreDate}
+          events={events}
+          holidays={holidays}
+          onDayClick={handleDayClick}
+          onEventClick={handleEditEvent}
+          onPrevMonth={handlePrevMonth}
+          onNextMonth={handleNextMonth}
+          setShowDatePicker={setShowDatePicker}
+          setIsModalOpen={setIsModalOpen}
+          resetForm={resetForm}
+        />
 
           <div className="flex-1">
             <main className="bg-white rounded-lg shadow-sm overflow-hidden">

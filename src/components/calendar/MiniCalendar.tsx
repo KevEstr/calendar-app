@@ -6,6 +6,7 @@ import { Event } from '../../types/Event';
 interface MiniCalendarProps {
   currentStoreDate: Date;
   events: Event[];
+  holidays: Holiday[];
   onDayClick: (day: number) => void;
   onPrevMonth: () => void;
   onNextMonth: () => void;
@@ -16,10 +17,15 @@ interface MiniCalendarProps {
   resetForm: () => void;
 }
 
+export interface Holiday {
+  date: string;
+  name: string;
+}
 
 export const MiniCalendar = ({ 
   currentStoreDate, 
   events, 
+  holidays,
   onDayClick, 
   onPrevMonth, 
   onNextMonth,
@@ -99,18 +105,30 @@ export const MiniCalendar = ({
         ))}
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const day = i + 1;
+          const isHoliday = holidays.some(holiday => {
+            const holidayDate = new Date(holiday.date);
+            return holidayDate.getDate() === day && 
+                  holidayDate.getMonth() === currentStoreDate.getMonth();
+          });
           return (
             <div
               key={day}
               onClick={() => onDayClick(day)}
               className={`
-                aspect-square flex items-center justify-center rounded-full
+                aspect-square flex items-center justify-center rounded-full relative
                 ${getDaysWithEvents(events).includes(day) ? "bg-blue-100 text-blue-700 font-medium" : ""}
                 ${isToday(day, currentStoreDate) ? "bg-blue-600 text-white font-medium" : ""}
+                ${isHoliday ? "border border-red-400" : ""}
                 hover:bg-gray-100 cursor-pointer transition-all
+                group
               `}
             >
               {day}
+              {isHoliday && (
+                <div className="hidden group-hover:block absolute bottom-full left-1/2 transform -translate-x-1/2 bg-white p-2 rounded shadow-lg text-xs z-10 whitespace-nowrap">
+                  {holidays.find(h => new Date(h.date).getDate() === day)?.name}
+                </div>
+              )}
             </div>
           );
         })}

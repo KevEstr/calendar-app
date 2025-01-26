@@ -7,6 +7,7 @@ interface SidebarProps {
   isOpen: boolean;
   currentStoreDate: Date;
   events: Event[];
+  holidays: Holiday[];
   onDayClick: (day: number) => void;
   onEventClick: (event: Event) => void;
   onPrevMonth: () => void;
@@ -16,10 +17,16 @@ interface SidebarProps {
   resetForm: () => void;
 }
 
+export interface Holiday {
+  date: string;
+  name: string;
+}
+
 export const Sidebar = ({
   isOpen,
   currentStoreDate,
   events,
+  holidays,
   onDayClick,
   onEventClick,
   onPrevMonth,
@@ -38,6 +45,7 @@ const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
       <MiniCalendar
         currentStoreDate={currentStoreDate}
         events={events}
+        holidays={holidays}
         onDayClick={onDayClick}
         onPrevMonth={onPrevMonth}
         onNextMonth={onNextMonth}

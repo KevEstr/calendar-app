@@ -1,17 +1,32 @@
 import { Event } from '../../types/Event';
 import { isToday } from '../../utils/dateHelpers';
 import { getDayEvents } from '../../utils/eventHelpers';
+import { Calendar } from 'lucide-react'; // Add this import
 
 interface MonthViewProps {
   currentStoreDate: Date;
   events: Event[];
+  holidays: Holiday[];
   onDayClick: (day: number) => void;
   onEventClick: (event: Event) => void;
 }
 
-export const MonthView = ({ currentStoreDate, events, onDayClick, onEventClick }: MonthViewProps) => {
+export interface Holiday {
+  date: string;
+  name: string;
+}
+
+export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEventClick }: MonthViewProps) => {
   const firstDay = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth(), 1).getDay();
   const daysInMonth = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth() + 1, 0).getDate();
+
+  const checkIsHoliday = (dayNumber: number) => {
+    return holidays.some(holiday => {
+      const holidayDate = new Date(holiday.date);
+      return holidayDate.getDate() === dayNumber && 
+             holidayDate.getMonth() === currentStoreDate.getMonth();
+    });
+  };
 
   return (
     <>
@@ -29,16 +44,29 @@ export const MonthView = ({ currentStoreDate, events, onDayClick, onEventClick }
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const day = i + 1;
           const dayEvents = getDayEvents(day, currentStoreDate, events);
+          const isHoliday = checkIsHoliday(day);
+
           return (
             <div key={day} onClick={() => onDayClick(day)} className="relative group cursor-pointer">
               <div className={`
                 aspect-square p-1 md:p-2 lg:p-4 rounded-lg transition-all border border-gray-100
                 ${isToday(day, currentStoreDate) ? "bg-gradient-to-br from-blue-50 to-blue-100 ring-2 ring-blue-500" : "hover:bg-gray-50 hover:shadow-md"}
                 ${dayEvents.length > 0 ? "ring-1 ring-blue-200" : ""}
+                ${isHoliday ? "bg-red-50 ring-1 ring-red-200" : ""}
               `}>
+
+                {isHoliday && (
+                  <div className="absolute top-1 right-1 text-red-500">
+                    <Calendar className="w-3 h-3 md:w-4 md:h-4" />
+                    <div className="hidden group-hover:block absolute z-10 bg-white p-2 rounded shadow-lg text-xs">
+                      {holidays.find(h => new Date(h.date).getDate() === day)?.name}
+                    </div>
+                  </div>
+                )}
+
                 <div className={`
                   text-xs md:text-sm lg:text-base w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center mb-1 md:mb-2
-                  ${isToday(day, currentStoreDate) ? "bg-blue-600 text-white" : "text-gray-700"}
+                  ${isToday(day, currentStoreDate) ? "bg-blue-600 text-white" : isHoliday ? "text-red-600" : "text-gray-700"}
                 `}>
                   {day}
                 </div>
