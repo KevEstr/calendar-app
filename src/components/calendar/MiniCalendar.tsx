@@ -36,6 +36,7 @@ export const MiniCalendar = ({
           <Calendar className="w-4 h-4 text-gray-500" />
           <span className="text-sm font-medium">Vista rápida del calendario</span>
         </div>
+
         {isCollapsed ? (
           <ChevronDown className="w-4 h-4 text-gray-500" />
         ) : (
@@ -43,7 +44,7 @@ export const MiniCalendar = ({
         )}
       </button>
 
-    <div className={`${isCollapsed ? 'hidden' : 'block'} md:block`}></div>
+    <div className={`${isCollapsed ? 'hidden' : 'block'} md:block`}>
 
     <div className="p-2 md:p-4">
       <div className="flex items-center justify-between mb-4">
@@ -95,6 +96,7 @@ export const MiniCalendar = ({
         })}
       </div>
     </div>
-    </div>
+  </div>
+  </div>
   );
 };
