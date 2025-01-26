@@ -43,14 +43,24 @@ export const EventPreview = ({
             <div key={event.id} className="bg-gray-50 rounded-lg p-4">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-medium">{event.title}</h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-medium">{event.title}</h3>
+                    {event.status === 'expired' && (
+                      <span className="text-xs px-2 py-1 bg-red-100 text-red-600 rounded-full">
+                        Expirado
+                      </span>
+                    )}
+                  </div>
                   <p className="text-sm text-gray-600">{event.startTime} - {event.endTime}</p>
                   <p className="text-sm mt-2">{event.description}</p>
                 </div>
                 <div className="flex gap-2">
                   <button
                     onClick={() => onEditEvent(event)}
-                    className="p-2 hover:bg-gray-200 rounded-lg"
+                    className={`p-2 hover:bg-gray-200 rounded-lg ${
+                      event.status === 'expired' ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                    disabled={event.status === 'expired'}
                   >
                     <PencilIcon className="w-4 h-4" />
                   </button>
@@ -64,6 +74,7 @@ export const EventPreview = ({
               </div>
             </div>
           ))}
+
         </div>
       </div>
     </div>

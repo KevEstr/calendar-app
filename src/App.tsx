@@ -40,7 +40,6 @@ export default function App() {
     setCurrentView,
     handlePrevMonth,
     handleNextMonth,
-    handleTodayClick
   } = useCalendar();
 
   const handleDayClick = (day: number) => {
@@ -108,7 +107,6 @@ export default function App() {
         setCurrentView={setCurrentView}
         onPrevMonth={handlePrevMonth}
         onNextMonth={handleNextMonth}
-        onTodayClick={handleTodayClick}
         onMenuClick={() => setSidebarOpen(!isSidebarOpen)}
       />
 

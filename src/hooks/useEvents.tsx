@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { addEvent, updateEvent, deleteEvent } from '../store/calendarSlice';
@@ -17,6 +17,25 @@ export const useEvents = () => {
     endTime: '',
     color: 'bg-blue-500'
   });
+
+  useEffect(() => {
+    const checkExpiredEvents = () => {
+      const now = new Date();
+      events.forEach(event => {
+        const eventDate = new Date(event.date);
+        const eventEndTime = event.endTime.split(':');
+        eventDate.setHours(parseInt(eventEndTime[0]), parseInt(eventEndTime[1]));
+        
+        if (eventDate < now) {
+          dispatch(updateEvent({ ...event, status: 'expired' }));
+        }
+      });
+    };
+  
+    const interval = setInterval(checkExpiredEvents, 60000);
+    return () => clearInterval(interval);
+  }, [events, dispatch]);
+  
 
   const resetForm = () => {
     setFormData({
@@ -60,7 +79,8 @@ export const useEvents = () => {
     const newEvent: Event = {
       id: selectedEvent?.id || uuidv4(),
       ...formData,
-      date: selectedDate
+      date: selectedDate,
+      status: 'active'
     };
 
     try {

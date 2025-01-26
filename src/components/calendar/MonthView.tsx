@@ -73,16 +73,27 @@ export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEv
                 {dayEvents.map((event) => (
                   <div
                     key={event.id}
-                    className={`text-[8px] md:text-xs lg:text-sm px-1 md:px-2 py-0.5 md:py-1 rounded-md md:rounded-lg ${event.color} text-white shadow-sm flex flex-col`}
+                    className={`
+                      text-[8px] md:text-xs lg:text-sm px-1 md:px-2 py-0.5 md:py-1 rounded-md md:rounded-lg 
+                      ${event.status === 'expired' ? 'bg-gray-400 line-through' : event.color} 
+                      text-white shadow-sm flex flex-col
+                      ${event.status === 'expired' ? 'opacity-60' : ''}
+                    `}
                     onClick={(e) => {
                       e.stopPropagation();
                       onEventClick(event);
                     }}
                   >
-                    <span className="text-[6px] md:text-[8px] lg:text-xs">{event.startTime}</span>
-                    <span className="text-[8px] md:text-xs lg:text-sm font-medium truncate max-w-[120px]">{event.title}</span>
+                    <span className="text-[6px] md:text-[8px] lg:text-xs">
+                      {event.startTime} 
+                      {event.status === 'expired' && ' (Expirado)'}
+                    </span>
+                    <span className="text-[8px] md:text-xs lg:text-sm font-medium truncate max-w-[120px]">
+                      {event.title}
+                    </span>
                   </div>
                 ))}
+
               </div>
             </div>
           );

@@ -6,5 +6,6 @@ export interface Event {
     endTime: string
     date: Date
     color: string
+    status: 'active' | 'expired';
   }
   
