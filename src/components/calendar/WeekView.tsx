@@ -22,38 +22,46 @@ export const WeekView = ({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-center gap-2 pt-6 mb-4">
-        {weeks.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setSelectedWeek(index)}
-            className={`px-4 py-2 rounded-lg ${
-              selectedWeek === index 
-                ? "bg-blue-600 text-white" 
-                : "bg-gray-100 hover:bg-gray-200"
-            }`}
-          >
-            Semana {index + 1}
-          </button>
-        ))}
+      {/* Week selector - make it scrollable on mobile */}
+      <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+        <div className="flex justify-start md:justify-center gap-2 pt-6 mb-4 min-w-max">
+          {weeks.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setSelectedWeek(index)}
+              className={`px-3 py-1.5 md:px-4 md:py-2 text-sm rounded-lg whitespace-nowrap ${
+                selectedWeek === index 
+                  ? "bg-blue-600 text-white" 
+                  : "bg-gray-100 hover:bg-gray-200"
+              }`}
+            >
+              Semana {index + 1}
+            </button>
+          ))}
+        </div>
       </div>
-      
-      <div className="grid grid-cols-7 gap-1 md:gap-2 lg:gap-4">
+  
+      {/* Week grid - optimize for mobile */}
+      <div className="grid grid-cols-1 md:grid-cols-7 gap-4 md:gap-2">
         {weeks[selectedWeek].map((day, dayIndex) => {
-          if (!day) return <div key={`empty-${dayIndex}`} className="bg-gray-50" />;
+          if (!day) return null;
           
           const currentDay = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth(), day);
           const dayEvents = events.filter(event => 
             new Date(event.date).toDateString() === currentDay.toDateString()
           );
-
+  
           return (
             <div key={dayIndex} className="bg-white rounded-lg shadow-sm">
-              <div className="text-xs md:text-sm lg:text-base font-medium sticky top-0 bg-white p-4 border-b text-center">
-                {currentDay.toLocaleDateString('es-ES', { weekday: 'long' }).replace(/^\w/, c => c.toUpperCase())}
-                <div className="text-gray-500 text-center">{day}</div>
+              {/* Day header */}
+              <div className="sticky top-0 bg-white p-3 border-b text-center">
+                <div className="font-medium text-gray-900">
+                  {currentDay.toLocaleDateString('es-ES', { weekday: 'short' })}
+                </div>
+                <div className="text-sm text-gray-500">{day}</div>
               </div>
               
+              {/* Time slots */}
               <div className="divide-y divide-gray-100">
                 {Array.from({ length: 24 }).map((_, hour) => {
                   const hourEvents = dayEvents.filter(event => {
@@ -61,7 +69,7 @@ export const WeekView = ({
                     const eventEndHour = parseInt(event.endTime.split(':')[0]);
                     return hour >= eventStartHour && hour < eventEndHour;
                   });
-
+  
                   return (
                     <div 
                       key={hour} 
@@ -72,7 +80,7 @@ export const WeekView = ({
                       }`}
                       onClick={() => onTimeSlotClick(currentDay, hour)}
                     >
-                      <div className="text-xs text-gray-500 font-medium">
+                      <div className="text-xs font-medium text-gray-500">
                         {`${hour.toString().padStart(2, '0')}:00`}
                       </div>
                       {hourEvents.map(event => (
@@ -84,7 +92,7 @@ export const WeekView = ({
                             onEventClick(event);
                           }}
                         >
-                          <div className="font-medium">{event.title}</div>
+                          <div className="font-medium text-sm">{event.title}</div>
                           <div className="text-xs opacity-90">{`${event.startTime} - ${event.endTime}`}</div>
                         </div>
                       ))}
@@ -98,4 +106,4 @@ export const WeekView = ({
       </div>
     </div>
   );
-};
+}  
