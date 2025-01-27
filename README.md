@@ -59,6 +59,7 @@ Este proyecto fue construido utilizando el siguiente stack tecnológico:
 - **💻 TypeScript** – Tipado estático para mayor seguridad y mantenimiento del código.
 - **⚡ Vite** – Herramienta de construcción rápida y eficiente.
 - **🎨 Tailwind CSS** – Framework de utilidades para un diseño moderno y responsivo.
+- 🔄 Redux – Librería para manejo de estado global en aplicaciones React.
 
 ---
 
