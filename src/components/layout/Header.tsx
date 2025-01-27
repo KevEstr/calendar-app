@@ -14,7 +14,6 @@ export const Header = ({
   currentView,
   setCurrentView,
 }: HeaderProps) => {
-  // Opciones de vista disponibles para el calendario
   const viewOptions = [
     { icon: CalendarIcon, label: "Mes", view: "month" as const },
     { icon: List, label: "Semana", view: "week" as const },
@@ -22,27 +21,25 @@ export const Header = ({
   ];
 
   return (
-    <div className="bg-white shadow-sm">
+    <div className="bg-white dark:bg-gray-800 shadow-sm">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between px-2 sm:px-4 md:px-6 py-4 space-y-4 md:space-y-0">
           
-          {/* Título del calendario */}
           <div className="flex items-center gap-4">
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-white">
               Mi Calendario
             </h1>
           </div>
 
-          {/* Selector de vista */}
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 w-full sm:w-auto">
-            <div className="flex bg-gray-100 rounded-lg p-1 w-full sm:w-auto">
+            <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1 w-full sm:w-auto">
               {viewOptions.map(({ icon: Icon, label, view }) => (
                 <button
                   key={label}
                   onClick={() => setCurrentView(view)}
                   className={` 
                     flex items-center justify-center px-2 sm:px-3 py-2 text-xs sm:text-sm md:text-base rounded-lg transition-all flex-1 sm:flex-auto
-                    ${currentView === view ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white/50"}
+                    ${currentView === view ? "bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400 shadow-sm" : "hover:bg-white/50 dark:hover:bg-gray-600/50"}
                   `}
                 >
                   <Icon className="w-4 h-4 md:w-5 md:h-5 sm:mr-2" />

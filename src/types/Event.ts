@@ -52,3 +52,8 @@ export interface WeekSelectorProps {
   selectedWeek: number;
   onWeekSelect: (weekIndex: number) => void;
 }
+
+export interface EventItemProps {
+  event: Event;  // Datos del evento
+  onEventClick: (event: Event) => void;  // Callback al hacer clic en el evento
+}

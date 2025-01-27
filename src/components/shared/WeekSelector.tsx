@@ -13,18 +13,16 @@ import { WeekSelectorProps } from '../../types/Event';
 export const WeekSelector = ({ weeks, selectedWeek, onWeekSelect }: WeekSelectorProps) => {
   return (
     <div className="flex justify-center gap-2 pt-6 mb-4">
-      {/* Botones para cada semana */}
       {weeks.map((_, index) => (
         <button
           key={index}
-          onClick={() => onWeekSelect(index)} // Llama a la función onWeekSelect con el índice seleccionado
+          onClick={() => onWeekSelect(index)}
           className={`px-4 py-2 rounded-lg ${
             selectedWeek === index 
-              ? "bg-blue-600 text-white" // Estilo para la semana seleccionada
-              : "bg-gray-100 hover:bg-gray-200" // Estilo para las semanas no seleccionadas
+              ? "bg-blue-600 text-white" 
+              : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100"
           }`}
         >
-          {/* Etiqueta del botón mostrando el número de la semana */}
           Semana {index + 1}
         </button>
       ))}

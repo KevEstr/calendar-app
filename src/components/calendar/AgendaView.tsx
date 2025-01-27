@@ -22,29 +22,28 @@ export const AgendaView = ({ currentStoreDate, events, onEventClick }: AgendaVie
   return (
     <div className="max-w-3xl mx-auto space-y-2 md:space-y-4 lg:space-y-6">
       {getDaysWithEvents(events).map((day) => {
-        // Obtiene los eventos correspondientes a un día específico
         const dayEvents = getDayEvents(day, currentStoreDate, events);
 
         return (
-          <div key={day} className="bg-white rounded-lg overflow-hidden shadow-sm">
+          <div key={day} className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm transition-colors duration-200">
             {/* Encabezado con la fecha del día y el mes actual */}
-            <div className="bg-gray-50 p-2 md:p-4 lg:p-6 text-sm md:text-base lg:text-lg font-medium">
+            <div className="bg-gray-50 dark:bg-gray-700 p-2 md:p-4 lg:p-6 text-sm md:text-base lg:text-lg font-medium text-gray-900 dark:text-gray-100">
               {`${day} de ${currentStoreDate.toLocaleString('default', { month: 'long' })}, ${currentStoreDate.getFullYear()}`}
             </div>
 
             {/* Lista de eventos del día, divididos por líneas para mejor visibilidad */}
-            <div className="divide-y divide-gray-100">
+            <div className="divide-y divide-gray-100 dark:divide-gray-700">
               {dayEvents.map((event) => (
                 <div 
                   key={event.id} 
-                  className="p-2 md:p-4 lg:p-6 hover:bg-gray-50 transition-colors cursor-pointer"
-                  onClick={() => onEventClick(event)}  // Maneja la acción de clic en el evento
+                  className="p-2 md:p-4 lg:p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+                  onClick={() => onEventClick(event)}
                 >
-                  <div className="text-xs md:text-sm lg:text-base font-medium">
-                    {event.title}  {/* Título del evento */}
+                  <div className="text-xs md:text-sm lg:text-base font-medium text-gray-900 dark:text-gray-100">
+                    {event.title}
                   </div>
-                  <div className="text-[10px] md:text-xs lg:text-sm text-gray-500">
-                    {event.startTime} - {event.endTime}  {/* Horario del evento */}
+                  <div className="text-[10px] md:text-xs lg:text-sm text-gray-500 dark:text-gray-400">
+                    {event.startTime} - {event.endTime}
                   </div>
                 </div>
               ))}

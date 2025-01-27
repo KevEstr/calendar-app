@@ -22,33 +22,33 @@ export const CalendarHeader = ({
   onNextMonth 
 }: CalendarHeaderProps) => {
   return (
-    <div className="text-center py-6 md:py-8 border-b">
+    <div className="text-center py-6 md:py-8 border-b border-gray-200 dark:border-gray-700">
       <div className="flex items-center justify-center gap-4">
         
         {/* Botón para retroceder al mes anterior */}
         <div className="flex gap-1">
           <button 
             onClick={onPrevMonth}
-            className="p-1 hover:bg-gray-100 rounded"
+            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
           >
-            <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-gray-600" />
+            <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-gray-600 dark:text-gray-400" />
           </button>
         </div>
 
         {/* Muestra el mes y el año actual en formato "Mes Año" */}
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
           {currentStoreDate.toLocaleString('es-ES', { 
-            month: 'long',  // Muestra el nombre completo del mes en español
-            year: 'numeric' // Muestra el año en formato numérico
-          }).replace(/^\w/, (c: string) => c.toUpperCase())} {/* Capitaliza la primera letra del mes */}
+            month: 'long',
+            year: 'numeric'
+          }).replace(/^\w/, (c: string) => c.toUpperCase())}
         </h2>
 
         {/* Botón para avanzar al mes siguiente */}
         <button 
           onClick={onNextMonth}
-          className="p-2 hover:bg-gray-100 rounded-full"
+          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
         >
-          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-gray-600" />
+          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-gray-600 dark:text-gray-400" />
         </button>
 
       </div>

@@ -7,6 +7,17 @@ $calendar-colors: (
   'yellow': #EAB308  // bg-yellow-500
 );
 
+$calendar-colors-dark: (
+  'blue': #2563EB,   // dark:bg-blue-600
+  'green': #16A34A,  // dark:bg-green-600
+  'purple': #9333EA, // dark:bg-purple-600
+  'red': #DC2626,    // dark:bg-red-600
+  'yellow': #CA8A04  // dark:bg-yellow-600
+);
+
+
 // Variables para estados
 $event-expired: #9CA3AF;  // gray-400
+$event-expired-dark: #4B5563;  // dark:gray-600
 $event-hover: #F3F4F6;    // gray-100
+$event-hover-dark: #374151;  // dark:gray-700

@@ -73,3 +73,9 @@ export interface WeekViewProps {
   onEventClick: (event: Event) => void;
   onTimeSlotClick: (date: Date, hour: number) => void;
 }
+
+// Veriicar que días son festivos por medio de la API
+export type HolidayChecker = (dayNumber: number) => boolean;
+
+// Calcular la cantidad de eventos por día para mejorar lo responsive
+export type EventSizeCalculator = () => number;

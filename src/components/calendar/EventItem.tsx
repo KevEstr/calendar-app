@@ -14,12 +14,7 @@
  * - Diseño responsivo con diferentes tamaños de fuente y altura según la pantalla.
  */
 
-import { Event } from '../../types/Event';
-
-interface EventItemProps {
-  event: Event;  // Datos del evento
-  onEventClick: (event: Event) => void;  // Callback al hacer clic en el evento
-}
+import { EventItemProps } from '../../types/Event';
 
 export const EventItem = ({ event, onEventClick }: EventItemProps) => {
   return (
@@ -31,12 +26,12 @@ export const EventItem = ({ event, onEventClick }: EventItemProps) => {
       className={`
         flex items-center h-4 md:h-5 lg:h-6 px-1 rounded-md text-white 
         text-[8px] md:text-xs lg:text-sm
-        ${event.status === 'expired' ? 'bg-gray-400 line-through' : event.color}
+        ${event.status === 'expired' ? 'bg-gray-400 dark:bg-gray-600 line-through' : event.color}
         hover:brightness-110 transition-all cursor-pointer
       `}
     >
       {/* Indicador visual de evento (punto blanco al lado del título) */}
-      <span className="w-1 h-1 md:w-1.5 md:h-1.5 bg-white rounded-full mr-1 flex-shrink-0"></span>
+      <span className="w-1 h-1 md:w-1.5 md:h-1.5 bg-white dark:bg-white/90 rounded-full mr-1 flex-shrink-0"></span>
       
       {/* Título del evento con truncamiento si excede el espacio disponible */}
       <span className="truncate">{event.title}</span>

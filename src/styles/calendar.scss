@@ -7,3 +7,11 @@
     }
   }
 }
+
+:root[class~="dark"] .calendar-event {
+  @each $name, $color in $calendar-colors-dark {
+    &.bg-#{$name}-500 {
+      background-color: $color;
+    }
+  }
+}

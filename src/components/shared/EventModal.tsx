@@ -30,91 +30,84 @@ export const EventModal = ({
   showDatePicker,
   setSelectedDate
 }: EventModalProps) => {
-  if (!isOpen) return null; // No renderizar si el modal está cerrado.
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 backdrop-blur-sm">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md">
         
-        {/* Encabezado del modal */}
-        <div className="flex items-center justify-between p-3 border-b">
-          <h2 className="text-xl font-semibold">
+        <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
             {selectedEvent ? 'Editar Evento' : 'Nuevo Evento'} - {selectedDate?.toLocaleDateString()}
           </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
           </button>
         </div>
 
-        {/* Cuerpo del modal */}
         <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
-          {/* Campo de título */}
           <div>
-            <label className="block text-sm font-medium mb-1">Título</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Título</label>
             <input
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-3 py-1.5 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-1.5 text-base border dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               placeholder="Añade un título"
             />
           </div>
 
-          {/* Selector de fecha */}
           {showDatePicker && (
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Fecha
               </label>
               <input
                 type="date"
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 value={selectedDate ? selectedDate.toISOString().split('T')[0] : ''}
                 onChange={(e) => setSelectedDate(new Date(e.target.value))}
               />
             </div>
           )}
 
-          {/* Campos de hora inicio y fin */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Hora inicio</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Hora inicio</label>
               <input
                 type="time"
                 value={formData.startTime}
                 onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
-                className="w-full px-4 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 text-base border dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Hora fin</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Hora fin</label>
               <input
                 type="time"
                 value={formData.endTime}
                 onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
-                className="w-full px-4 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 text-base border dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
           </div>
 
-          {/* Campo de descripción */}
           <div>
-            <label className="block text-sm font-medium mb-2">Descripción</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Descripción</label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full px-3 py-1.5 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full px-3 py-1.5 text-base border dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               rows={2}
               placeholder="Añade una descripción"
             />
           </div>
 
-          {/* Selector de color */}
           <div>
-            <label className="block text-sm font-medium mb-2">Color del evento</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Color del evento</label>
             <div className="flex gap-3">
               {[
                 { value: "bg-blue-500", label: "Azul" },
@@ -131,8 +124,8 @@ export const EventModal = ({
                     transition-all duration-200
                     hover:scale-110
                     ${formData.color === colorOption.value 
-                      ? 'ring-2 ring-offset-2 ring-gray-400 scale-110' 
-                      : 'hover:ring-2 hover:ring-offset-2 hover:ring-gray-200'
+                      ? 'ring-2 ring-offset-2 ring-gray-400 dark:ring-gray-500 scale-110' 
+                      : 'hover:ring-2 hover:ring-offset-2 hover:ring-gray-200 dark:hover:ring-gray-600'
                     }
                   `}
                   title={colorOption.label}
@@ -148,19 +141,18 @@ export const EventModal = ({
           </div>
         </div>
 
-        {/* Botones de acción */}
-        <div className="flex justify-end gap-3 p-3 bg-gray-50 rounded-b-xl">
+        <div className="flex justify-end gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-b-xl">
           {selectedEvent && (
             <button
               onClick={() => onDelete(selectedEvent.id)}
-              className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+              className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
             >
               Eliminar
             </button>
           )}
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-colors"
           >
             Cancelar
           </button>

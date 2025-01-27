@@ -29,7 +29,6 @@ export const WeekView = ({
   return (
     <div className="flex flex-col gap-4">
       
-      {/* Selector de semanas - desplazable en pantallas móviles */}
       <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
         <div className="flex justify-start md:justify-center gap-2 pt-6 mb-4 min-w-max">
           {weeks.map((_, index) => (
@@ -39,7 +38,7 @@ export const WeekView = ({
               className={`px-3 py-1.5 md:px-4 md:py-2 text-sm rounded-lg whitespace-nowrap ${
                 selectedWeek === index 
                   ? "bg-blue-600 text-white" 
-                  : "bg-gray-100 hover:bg-gray-200"
+                  : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100"
               }`}
             >
               Semana {index + 1}
@@ -48,7 +47,6 @@ export const WeekView = ({
         </div>
       </div>
   
-      {/* Vista semanal - diseño adaptable a móviles */}
       <div className="grid grid-cols-2 md:grid-cols-7 gap-4 md:gap-2">
         {weeks[selectedWeek].map((day, dayIndex) => {
           if (!day) return null;
@@ -59,11 +57,10 @@ export const WeekView = ({
           );
   
           return (
-            <div key={dayIndex} className="bg-white rounded-lg shadow-sm">
+            <div key={dayIndex} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
               
-              {/* Encabezado del día */}
-              <div className="sticky top-0 bg-white p-3 border-b text-center">
-                <div className="font-medium text-gray-900">
+              <div className="sticky top-0 bg-white dark:bg-gray-800 p-3 border-b border-gray-200 dark:border-gray-700 text-center">
+                <div className="font-medium text-gray-900 dark:text-gray-100">
                   <span className="block md:hidden">
                     {currentDay.toLocaleDateString('es-ES', { weekday: 'narrow' })}
                   </span>
@@ -71,13 +68,11 @@ export const WeekView = ({
                     {currentDay.toLocaleDateString('es-ES', { weekday: 'long' })}
                   </span>
                 </div>
-                <div className="text-sm text-gray-500">{day}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">{day}</div>
               </div>
               
-              {/* Fracciones horarias del día */}
-              <div className="divide-y divide-gray-100">
+              <div className="divide-y divide-gray-100 dark:divide-gray-700">
                 {Array.from({ length: 24 }).map((_, hour) => {
-                  // Filtra eventos que coinciden con la franja horaria actual
                   const hourEvents = dayEvents.filter(event => {
                     const eventStartHour = parseInt(event.startTime.split(':')[0]);
                     const eventEndHour = parseInt(event.endTime.split(':')[0]);
@@ -89,12 +84,12 @@ export const WeekView = ({
                       key={hour} 
                       className={`p-2 transition-colors ${
                         hourEvents.length > 0 
-                          ? 'bg-blue-50 hover:bg-blue-100' 
-                          : 'hover:bg-gray-50'
+                          ? 'bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50' 
+                          : 'hover:bg-gray-50 dark:hover:bg-gray-700'
                       }`}
                       onClick={() => onTimeSlotClick(currentDay, hour)}
                     >
-                      <div className="text-xs font-medium text-gray-500">
+                      <div className="text-xs font-medium text-gray-500 dark:text-gray-400">
                         {`${hour.toString().padStart(2, '0')}:00`}
                       </div>
                       {hourEvents.map(event => (
@@ -102,7 +97,7 @@ export const WeekView = ({
                           key={event.id}
                           className={`${event.color} mt-1 p-2 rounded-lg text-white cursor-pointer`}
                           onClick={(e) => {
-                            e.stopPropagation(); // Evita que el clic se propague al contenedor del slot
+                            e.stopPropagation();
                             onEventClick(event);
                           }}
                         >

@@ -31,18 +31,16 @@ export const Sidebar = ({
   setIsModalOpen,
   resetForm
 }: SidebarProps) => {
-  // Estado para colapsar o expandir el mini calendario
   const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
 
   return (
     <aside
       className={`
         ${isOpen ? "block" : "hidden"} 
-        md:block bg-white rounded-lg shadow-sm transition-all duration-300 
+        md:block bg-white dark:bg-gray-800 rounded-lg shadow-sm transition-all duration-300 
         overflow-hidden flex-shrink-0 w-full md:w-64 lg:w-80
       `}
     >
-      {/* Mini calendario */}
       <MiniCalendar
         currentStoreDate={currentStoreDate}
         events={events}
@@ -57,9 +55,8 @@ export const Sidebar = ({
         resetForm={resetForm}
       />
 
-      {/* Sección de próximos eventos */}
-      <div className="p-4 md:p-6 border-t border-gray-100">
-        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
+      <div className="p-4 md:p-6 border-t border-gray-100 dark:border-gray-700">
+        <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
           Próximos eventos
         </h3>
         <div className="space-y-4">
@@ -67,12 +64,12 @@ export const Sidebar = ({
             <div 
               key={event.id}
               onClick={() => onEventClick(event)}
-              className="p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+              className="p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors"
             >
               <div className={`text-sm font-medium ${event.color.replace('bg-', 'text-')}`}>
                 {event.title}
               </div>
-              <div className="text-xs text-gray-500">
+              <div className="text-xs text-gray-500 dark:text-gray-400">
                 {new Date(event.date).toLocaleDateString('es-ES', { 
                   day: 'numeric',
                   month: 'long'
@@ -81,9 +78,8 @@ export const Sidebar = ({
             </div>
           ))}
           
-          {/* Mensaje si no hay eventos próximos */}
           {getUpcomingEvents(events).length === 0 && (
-            <div className="text-sm text-gray-500 text-center">
+            <div className="text-sm text-gray-500 dark:text-gray-400 text-center">
               No hay eventos próximos
             </div>
           )}
