@@ -45,7 +45,9 @@ Este proyecto ha sido desarrollado con un enfoque en:
 
 Se desarrolló la página teniendo en cuenta las distintas formas en que un cliente puede acceder, añadir y ver todo tipo de eventos,
 priorizando la experiencia de usuario y brindandole al cliente todas las opciones que tiene lo más minimalista y eficiente posible
-desde el menu principal, y teniendo varias opciones que se adaptan a distintos clientes segun sus necesidades. 
+desde el menu principal, teniendo varias opciones que se adaptan a distintos clientes segun sus necesidades. Por ejemplo, un calendario grande
+con todos los eventos, un mini calendario que abarca una vista previa de todo el contenido o un botón de evento rápido para introducir 
+el evento sin necesidad de navegar por todos los meses.
 
 ---
 
