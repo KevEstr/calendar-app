@@ -12,7 +12,7 @@ import { CalendarHeader } from "./components/calendar/CalendarHeader";
 import { CalendarView } from "./components/calendar/CalendarView";
 
 // Importación de estilos y tipos globales
-import "./App.css";
+import "./styles/App.css";
 import { useHolidays } from './hooks/useHolidays';
 import { Event } from './types/Event';
 

@@ -1,0 +1,12 @@
+// Variables de colores del calendario
+$calendar-colors: (
+  'blue': #3B82F6,   // bg-blue-500
+  'green': #22C55E,  // bg-green-500
+  'purple': #A855F7, // bg-purple-500
+  'red': #EF4444,    // bg-red-500
+  'yellow': #EAB308  // bg-yellow-500
+);
+
+// Variables para estados
+$event-expired: #9CA3AF;  // gray-400
+$event-hover: #F3F4F6;    // gray-100

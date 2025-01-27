@@ -1,0 +1,9 @@
+@use 'variables' as *;
+
+.calendar-event {
+  @each $name, $color in $calendar-colors {
+    &.bg-#{$name}-500 {
+      background-color: $color;
+    }
+  }
+}
