@@ -1,25 +1,29 @@
-import { Event } from '../../types/Event';
 import { isToday } from '../../utils/dateHelpers';
 import { getDayEvents } from '../../utils/eventHelpers';
-import { Calendar } from 'lucide-react'; // Add this import
+import { Calendar } from 'lucide-react';
+import { MonthViewProps } from '../../types/Calendar';
 
-interface MonthViewProps {
-  currentStoreDate: Date;
-  events: Event[];
-  holidays: Holiday[];
-  onDayClick: (day: number) => void;
-  onEventClick: (event: Event) => void;
-}
-
-export interface Holiday {
-  date: string;
-  name: string;
-}
-
+/**
+ * Componente MonthView
+ * 
+ * Muestra un calendario mensual con la capacidad de visualizar eventos, festivos
+ * y resaltar el día actual. Permite la interacción para seleccionar días y eventos.
+ * 
+ * @param {MonthViewProps} props - Propiedades del componente:
+ *   - currentStoreDate: Fecha actual del calendario.
+ *   - events: Lista de eventos del mes.
+ *   - holidays: Lista de días festivos.
+ *   - onDayClick: Función para manejar clics en los días del calendario.
+ *   - onEventClick: Función para manejar clics en los eventos del calendario.
+ */
 export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEventClick }: MonthViewProps) => {
+  // Obtiene el día de la semana en que comienza el mes (0 = domingo, 1 = lunes, etc.)
   const firstDay = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth(), 1).getDay();
+  
+  // Obtiene la cantidad de días en el mes actual
   const daysInMonth = new Date(currentStoreDate.getFullYear(), currentStoreDate.getMonth() + 1, 0).getDate();
 
+  // Verifica si un día específico es un feriado
   const checkIsHoliday = (dayNumber: number) => {
     return holidays.some(holiday => {
       const holidayDate = new Date(holiday.date);
@@ -30,6 +34,7 @@ export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEv
 
   return (
     <>
+      {/* Encabezado con nombres de los días de la semana */}
       <div className="grid grid-cols-7 mb-2 md:mb-4">
         {["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"].map((day) => (
           <div key={day} className="text-[10px] md:text-sm lg:text-base font-semibold text-gray-600 text-center py-1 md:py-2">
@@ -37,10 +42,15 @@ export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEv
           </div>
         ))}
       </div>
+
+      {/* Cuerpo del calendario con días y eventos */}
       <div className="grid grid-cols-7 gap-0.5 md:gap-2 lg:gap-4">
+        {/* Espacios vacíos para días antes del primer día del mes */}
         {Array.from({ length: firstDay }).map((_, i) => (
           <div key={`empty-${i}`} className="aspect-square"></div>
         ))}
+
+        {/* Días del mes */}
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const day = i + 1;
           const dayEvents = getDayEvents(day, currentStoreDate, events);
@@ -55,6 +65,7 @@ export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEv
                 ${isHoliday ? "bg-red-50 ring-1 ring-red-200" : ""}
               `}>
 
+                {/* Icono de festivo */}
                 {isHoliday && (
                   <div className="absolute top-1 right-1 text-red-500">
                     <Calendar className="w-3 h-3 md:w-4 md:h-4" />
@@ -64,12 +75,15 @@ export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEv
                   </div>
                 )}
 
+                {/* Número del día */}
                 <div className={`
                   text-xs md:text-sm lg:text-base w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center mb-1 md:mb-2
                   ${isToday(day, currentStoreDate) ? "bg-blue-600 text-white" : isHoliday ? "text-red-600" : "text-gray-700"}
                 `}>
                   {day}
                 </div>
+
+                {/* Lista de eventos del día */}
                 {dayEvents.map((event) => (
                   <div
                     key={event.id}
@@ -80,7 +94,7 @@ export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEv
                       ${event.status === 'expired' ? 'opacity-60' : ''}
                     `}
                     onClick={(e) => {
-                      e.stopPropagation();
+                      e.stopPropagation(); // Evita que se active el evento de clic del día
                       onEventClick(event);
                     }}
                   >

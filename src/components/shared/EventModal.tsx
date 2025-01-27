@@ -1,32 +1,23 @@
 import { X } from 'lucide-react';
-import { Event } from '../../types/Event';
+import { EventModalProps } from '../../types/Event';
 
-interface EventModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  selectedDate: Date | null;
-  selectedEvent: Event | null;
-  formData: {
-    title: string;
-    description: string;
-    startTime: string;
-    endTime: string;
-    color: string;
-  };
-  setFormData: (formData: {
-    title: string;
-    description: string;
-    startTime: string;
-    endTime: string;
-    color: string;
-  }) => void;
-  onSubmit: () => void;
-  onDelete: (id: string) => void;
-  showDatePicker: boolean;
-  setSelectedDate: (date: Date) => void;
-}
-
-
+/**
+ * Componente EventModal
+ * 
+ * Modal para crear o editar un evento en el calendario.
+ * 
+ * @param {EventModalProps} props - Propiedades del componente:
+ *   - isOpen: Indica si el modal está visible.
+ *   - onClose: Función para cerrar el modal.
+ *   - selectedDate: Fecha seleccionada para el evento.
+ *   - selectedEvent: Evento seleccionado (si se está editando uno existente).
+ *   - formData: Estado del formulario de evento.
+ *   - setFormData: Función para actualizar los valores del formulario.
+ *   - onSubmit: Función para guardar o actualizar un evento.
+ *   - onDelete: Función para eliminar un evento.
+ *   - showDatePicker: Booleano que indica si se debe mostrar el selector de fecha.
+ *   - setSelectedDate: Función para cambiar la fecha seleccionada.
+ */
 export const EventModal = ({
   isOpen,
   onClose,
@@ -39,11 +30,13 @@ export const EventModal = ({
   showDatePicker,
   setSelectedDate
 }: EventModalProps) => {
-  if (!isOpen) return null;
+  if (!isOpen) return null; // No renderizar si el modal está cerrado.
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 backdrop-blur-sm">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
+        
+        {/* Encabezado del modal */}
         <div className="flex items-center justify-between p-3 border-b">
           <h2 className="text-xl font-semibold">
             {selectedEvent ? 'Editar Evento' : 'Nuevo Evento'} - {selectedDate?.toLocaleDateString()}
@@ -55,18 +48,22 @@ export const EventModal = ({
             <X className="w-5 h-5" />
           </button>
         </div>
+
+        {/* Cuerpo del modal */}
         <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+          {/* Campo de título */}
           <div>
-          <label className="block text-sm font-medium mb-1">Título</label>
+            <label className="block text-sm font-medium mb-1">Título</label>
             <input
               type="text"
               value={formData.title}
-              onChange={(e) => setFormData({...formData, title: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               className="w-full px-3 py-1.5 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Añade un título"
             />
           </div>
 
+          {/* Selector de fecha */}
           {showDatePicker && (
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -81,13 +78,14 @@ export const EventModal = ({
             </div>
           )}
 
+          {/* Campos de hora inicio y fin */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium mb-2">Hora inicio</label>
               <input
                 type="time"
                 value={formData.startTime}
-                onChange={(e) => setFormData({...formData, startTime: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
                 className="w-full px-4 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -96,28 +94,32 @@ export const EventModal = ({
               <input
                 type="time"
                 value={formData.endTime}
-                onChange={(e) => setFormData({...formData, endTime: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
                 className="w-full px-4 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
+
+          {/* Campo de descripción */}
           <div>
             <label className="block text-sm font-medium mb-2">Descripción</label>
             <textarea
               value={formData.description}
-              onChange={(e) => setFormData({...formData, description: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               className="w-full px-3 py-1.5 text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               rows={2}
               placeholder="Añade una descripción"
             />
           </div>
+
+          {/* Selector de color */}
           <div>
             <label className="block text-sm font-medium mb-2">Color del evento</label>
             <div className="flex gap-3">
               {["bg-blue-500", "bg-green-500", "bg-purple-500", "bg-red-500", "bg-yellow-500"].map((color) => (
                 <button
                   key={color}
-                  onClick={() => setFormData({...formData, color})}
+                  onClick={() => setFormData({ ...formData, color })}
                   className={`w-8 h-8 rounded-full ${color} hover:ring-2 ring-offset-2 ring-gray-300 transition-all ${
                     formData.color === color ? 'ring-2' : ''
                   }`}
@@ -126,8 +128,9 @@ export const EventModal = ({
             </div>
           </div>
         </div>
-        <div className="flex justify-end gap-3 p-3 bg-gray-50 rounded-b-xl">
 
+        {/* Botones de acción */}
+        <div className="flex justify-end gap-3 p-3 bg-gray-50 rounded-b-xl">
           {selectedEvent && (
             <button
               onClick={() => onDelete(selectedEvent.id)}

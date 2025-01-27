@@ -1,27 +1,23 @@
 import { useState } from 'react';
-import { Event } from '../../types/Event';
 import { MiniCalendar } from '../calendar/MiniCalendar';
 import { getUpcomingEvents } from '../../utils/eventHelpers';
+import { SidebarProps } from '../../types/Layout';
 
-interface SidebarProps {
-  isOpen: boolean;
-  currentStoreDate: Date;
-  events: Event[];
-  holidays: Holiday[];
-  onDayClick: (day: number) => void;
-  onEventClick: (event: Event) => void;
-  onPrevMonth: () => void;
-  onNextMonth: () => void;
-  setShowDatePicker: (show: boolean) => void;
-  setIsModalOpen: (open: boolean) => void;
-  resetForm: () => void;
-}
-
-export interface Holiday {
-  date: string;
-  name: string;
-}
-
+/**
+ * Componente Sidebar
+ * 
+ * Muestra una barra lateral con un calendario miniatura y una lista de próximos eventos.
+ * 
+ * @param {SidebarProps} props - Propiedades del componente:
+ *   - isOpen: Indica si la barra lateral está visible.
+ *   - currentStoreDate: Fecha actual seleccionada en la aplicación.
+ *   - events: Lista de eventos registrados.
+ *   - holidays: Lista de días festivos.
+ *   - onDayClick: Función para manejar la selección de un día.
+ *   - onEventClick: Función para manejar la selección de un evento.
+ *   - onPrevMonth, onNextMonth: Funciones para cambiar el mes en el calendario.
+ *   - setShowDatePicker, setIsModalOpen, resetForm: Funciones auxiliares.
+ */
 export const Sidebar = ({
   isOpen,
   currentStoreDate,
@@ -35,13 +31,18 @@ export const Sidebar = ({
   setIsModalOpen,
   resetForm
 }: SidebarProps) => {
-const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
+  // Estado para colapsar o expandir el mini calendario
+  const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
+
   return (
     <aside
-      className={`${
-        isOpen ? "block" : "hidden"
-      } md:block bg-white rounded-lg shadow-sm transition-all duration-300 overflow-hidden flex-shrink-0 w-full md:w-64 lg:w-80`}
+      className={`
+        ${isOpen ? "block" : "hidden"} 
+        md:block bg-white rounded-lg shadow-sm transition-all duration-300 
+        overflow-hidden flex-shrink-0 w-full md:w-64 lg:w-80
+      `}
     >
+      {/* Mini calendario */}
       <MiniCalendar
         currentStoreDate={currentStoreDate}
         events={events}
@@ -56,6 +57,7 @@ const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
         resetForm={resetForm}
       />
 
+      {/* Sección de próximos eventos */}
       <div className="p-4 md:p-6 border-t border-gray-100">
         <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
           Próximos eventos
@@ -78,6 +80,8 @@ const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
               </div>
             </div>
           ))}
+          
+          {/* Mensaje si no hay eventos próximos */}
           {getUpcomingEvents(events).length === 0 && (
             <div className="text-sm text-gray-500 text-center">
               No hay eventos próximos

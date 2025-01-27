@@ -1,15 +1,20 @@
-import { Event } from '../../types/Event';
 import { getWeeksInMonth } from '../../utils/dateHelpers';
+import { WeekViewProps } from '../../types/Calendar';
 
-interface WeekViewProps {
-  currentStoreDate: Date;
-  events: Event[];
-  selectedWeek: number;
-  setSelectedWeek: (week: number) => void;
-  onEventClick: (event: Event) => void;
-  onTimeSlotClick: (date: Date, hour: number) => void;
-}
-
+/**
+ * Componente WeekView
+ * 
+ * Muestra una vista semanal de los eventos de un mes, permitiendo la selección de semanas
+ * y la interacción con eventos y franjas horarias.
+ * 
+ * @param {WeekViewProps} props - Propiedades del componente:
+ *   - currentStoreDate: Fecha actual seleccionada en el calendario.
+ *   - events: Lista de eventos del mes.
+ *   - selectedWeek: Índice de la semana actualmente seleccionada.
+ *   - setSelectedWeek: Función para cambiar la semana seleccionada.
+ *   - onEventClick: Función para manejar clics en eventos.
+ *   - onTimeSlotClick: Función para manejar clics en franjas horarias.
+ */
 export const WeekView = ({ 
   currentStoreDate, 
   events, 
@@ -18,11 +23,13 @@ export const WeekView = ({
   onEventClick,
   onTimeSlotClick 
 }: WeekViewProps) => {
+  // Obtiene las semanas del mes como un array de arrays de días
   const weeks = getWeeksInMonth(currentStoreDate);
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Week selector - make it scrollable on mobile */}
+      
+      {/* Selector de semanas - desplazable en pantallas móviles */}
       <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
         <div className="flex justify-start md:justify-center gap-2 pt-6 mb-4 min-w-max">
           {weeks.map((_, index) => (
@@ -41,7 +48,7 @@ export const WeekView = ({
         </div>
       </div>
   
-      {/* Week grid - optimize for mobile */}
+      {/* Vista semanal - diseño adaptable a móviles */}
       <div className="grid grid-cols-2 md:grid-cols-7 gap-4 md:gap-2">
         {weeks[selectedWeek].map((day, dayIndex) => {
           if (!day) return null;
@@ -53,7 +60,8 @@ export const WeekView = ({
   
           return (
             <div key={dayIndex} className="bg-white rounded-lg shadow-sm">
-              {/* Day header */}
+              
+              {/* Encabezado del día */}
               <div className="sticky top-0 bg-white p-3 border-b text-center">
                 <div className="font-medium text-gray-900">
                   <span className="block md:hidden">
@@ -66,9 +74,10 @@ export const WeekView = ({
                 <div className="text-sm text-gray-500">{day}</div>
               </div>
               
-              {/* Time slots */}
+              {/* Fracciones horarias del día */}
               <div className="divide-y divide-gray-100">
                 {Array.from({ length: 24 }).map((_, hour) => {
+                  // Filtra eventos que coinciden con la franja horaria actual
                   const hourEvents = dayEvents.filter(event => {
                     const eventStartHour = parseInt(event.startTime.split(':')[0]);
                     const eventEndHour = parseInt(event.endTime.split(':')[0]);
@@ -93,7 +102,7 @@ export const WeekView = ({
                           key={event.id}
                           className={`${event.color} mt-1 p-2 rounded-lg text-white cursor-pointer`}
                           onClick={(e) => {
-                            e.stopPropagation();
+                            e.stopPropagation(); // Evita que el clic se propague al contenedor del slot
                             onEventClick(event);
                           }}
                         >
@@ -105,10 +114,11 @@ export const WeekView = ({
                   );
                 })}
               </div>
+
             </div>
           );
         })}
       </div>
     </div>
   );
-}  
+};
