@@ -43,6 +43,10 @@ Este proyecto ha sido desarrollado con un enfoque en:
 - **Diseño responsive:** Adaptado para ofrecer una excelente experiencia en dispositivos móviles y de escritorio.
 - **Componentización:** Arquitectura basada en componentes reutilizables para una mayor mantenibilidad.
 
+Se desarrolló la página teniendo en cuenta las distintas formas en que un cliente puede acceder, añadir y ver todo tipo de eventos,
+priorizando la experiencia de usuario y brindandole al cliente todas las opciones que tiene lo más minimalista y eficiente posible
+desde el menu principal, y teniendo varias opciones que se adaptan a distintos clientes segun sus necesidades. 
+
 ---
 
 ## 🛠️ Herramientas utilizadas
