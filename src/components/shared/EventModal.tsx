@@ -116,14 +116,33 @@ export const EventModal = ({
           <div>
             <label className="block text-sm font-medium mb-2">Color del evento</label>
             <div className="flex gap-3">
-              {["bg-blue-500", "bg-green-500", "bg-purple-500", "bg-red-500", "bg-yellow-500"].map((color) => (
+              {[
+                { value: "bg-blue-500", label: "Azul" },
+                { value: "bg-green-500", label: "Verde" },
+                { value: "bg-purple-500", label: "Morado" },
+                { value: "bg-red-500", label: "Rojo" },
+                { value: "bg-yellow-500", label: "Amarillo" }
+              ].map((colorOption) => (
                 <button
-                  key={color}
-                  onClick={() => setFormData({ ...formData, color })}
-                  className={`w-8 h-8 rounded-full ${color} hover:ring-2 ring-offset-2 ring-gray-300 transition-all ${
-                    formData.color === color ? 'ring-2' : ''
-                  }`}
-                />
+                  key={colorOption.value}
+                  onClick={() => setFormData({ ...formData, color: colorOption.value })}
+                  className={`
+                    w-8 h-8 rounded-full ${colorOption.value} 
+                    transition-all duration-200
+                    hover:scale-110
+                    ${formData.color === colorOption.value 
+                      ? 'ring-2 ring-offset-2 ring-gray-400 scale-110' 
+                      : 'hover:ring-2 hover:ring-offset-2 hover:ring-gray-200'
+                    }
+                  `}
+                  title={colorOption.label}
+                >
+                  {formData.color === colorOption.value && (
+                    <span className="flex items-center justify-center text-white">
+                      ✓
+                    </span>
+                  )}
+                </button>
               ))}
             </div>
           </div>
