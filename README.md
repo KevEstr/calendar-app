@@ -75,6 +75,10 @@ Puedes visualizar el diseño de la aplicación en el siguiente enlace:
 
 [🔗 Diseño en Figma](https://www.figma.com/design/U0htWH1QMQ0xeRMU2iH68F/Untitled?node-id=0-1&m=dev&t=sY3CGqXgs9peBqks-1)
 
+Además, se desplegó la página web en la nube haciendo uso de Vercel para tener una mejor visualización del contenido creado:
+
+[🔗 Diseño Desplegado](https://calendar-app-nu-one.vercel.app/)
+
 ---
 
 ## 📂 Estructura del proyecto
