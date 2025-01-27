@@ -94,7 +94,7 @@ export const MiniCalendar = ({
           </button>
 
           <div className="grid grid-cols-7 gap-0.5 md:gap-1 text-center text-sm mb-1 md:mb-2">
-            {["D", "L", "M", "W", "J", "V", "S"].map((day) => (
+            {["D", "L", "M", "X", "J", "V", "S"].map((day) => (
               <div key={day} className="text-gray-500 dark:text-gray-400 font-medium">
                 {day}
               </div>
