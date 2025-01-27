@@ -193,6 +193,7 @@ export default function App() {
           closePreview();
         }}
         onNewEvent={() => {
+          setSelectedDate(new Date(selectedDayEvents[0].date));
           closePreview();
           openModal();
           resetForm();
