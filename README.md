@@ -4,7 +4,10 @@ Event Calendar es una página web diseñada para gestionar eventos de manera int
 
 Con una interfaz amigable y opciones de personalización, nos permite: 
 - La creación, edición y visualización de eventos en distintas vistas, facilitando una gestión fluida y optimizada.
-- Conocer los días festivos de cada mes haciendo uso de una API que nos brinda toda la información. 
+- Conocer los días festivos de cada mes haciendo uso de una API que nos brinda toda la información.
+- Ver los próximos eventos para un mayor orden en la agenda del cliente.
+- Saber que eventos han expirado debido a que ya se pasó de la fecha y/o hora de éste.
+- Tener controlado que no se añadan fechas incorrectas o pasadas del día actual, horas que se superponen o campos sin rellenar.
 
 ---
 
