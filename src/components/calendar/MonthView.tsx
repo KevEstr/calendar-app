@@ -58,9 +58,11 @@ export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEv
     return holidays.some(holiday => {
       const holidayDate = new Date(holiday.date);
       return holidayDate.getDate() === dayNumber && 
-             holidayDate.getMonth() === currentStoreDate.getMonth();
+             holidayDate.getMonth() === currentStoreDate.getMonth() &&
+             holidayDate.getFullYear() === currentStoreDate.getFullYear();
     });
   };
+  
 
   return (
     <div>
@@ -108,7 +110,12 @@ export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEv
                     <div className="group relative">
                       <Calendar className="w-3 h-3 md:w-4 md:h-4 text-red-500" />
                       <div className="hidden group-hover:block absolute z-10 right-0 bg-white dark:bg-gray-800 p-2 rounded shadow-lg text-xs whitespace-nowrap dark:text-gray-200">
-                        {holidays.find(h => new Date(h.date).getDate() === day)?.name}
+                      {holidays.find(h => {
+                        const holidayDate = new Date(h.date);
+                        return holidayDate.getDate() === day && 
+                              holidayDate.getMonth() === currentStoreDate.getMonth() &&
+                              holidayDate.getFullYear() === currentStoreDate.getFullYear();
+                      })?.name}
                       </div>
                     </div>
                   )}

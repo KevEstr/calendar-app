@@ -35,16 +35,16 @@ export const Header = ({
             <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1 w-full sm:w-auto">
               {viewOptions.map(({ icon: Icon, label, view }) => (
                 <button
-                  key={label}
-                  onClick={() => setCurrentView(view)}
-                  className={` 
-                    flex items-center justify-center px-2 sm:px-3 py-2 text-xs sm:text-sm md:text-base rounded-lg transition-all flex-1 sm:flex-auto
-                    ${currentView === view ? "bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400 shadow-sm" : "hover:bg-white/50 dark:hover:bg-gray-600/50"}
-                  `}
-                >
-                  <Icon className="w-4 h-4 md:w-5 md:h-5 sm:mr-2" />
-                  <span className="hidden sm:inline">{label}</span>
-                </button>
+                key={label}
+                onClick={() => setCurrentView(view)}
+                className={` 
+                  flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm md:text-base rounded-lg transition-all flex-1 sm:flex-auto
+                  ${currentView === view ? "bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400 shadow-sm" : "hover:bg-white/50 dark:hover:bg-gray-600/50"}
+                `}
+              >
+                <Icon className="w-4 h-4 md:w-5 md:h-5" />
+                <span className="text-[10px] sm:text-sm md:text-base">{label}</span>
+              </button>              
               ))}
             </div>
           </div>

@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface Holiday {
-  date: string;
-  name: string;
-}
+import { Holiday } from '../types/Holiday';
 
 /**
  * Hook personalizado para obtener los días festivos de Colombia.
@@ -21,21 +17,24 @@ export const useHolidays = (year: number) => {
       try {
         const response = await fetch(`https://api-colombia.com/api/v1/holiday/year/${year}`);
         const data = await response.json();
+        console.log('Raw holiday data:', data);
 
-        // Mapea los datos recibidos a un formato más manejable.
         setHolidays(
-          data.map((holiday: Holiday) => ({
-            date: holiday.date,
-            name: holiday.name,
-          }))
+          data.map((holiday: Holiday) => {
+            const mappedHoliday = {
+              date: holiday.date,
+              name: holiday.name,
+            };
+            return mappedHoliday;
+          })
         );
       } catch (error) {
         console.error('Error al obtener los días festivos:', error);
       }
     };
 
-    fetchHolidays(); // Llama a la función para cargar los datos.
-  }, [year]); // Se ejecuta cada vez que el año cambia.
+    fetchHolidays();
+}, [year]);
 
   return holidays;
 };
