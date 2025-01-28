@@ -82,7 +82,7 @@ export const WeekView = ({
                   return (
                     <div 
                       key={hour} 
-                      className={`p-2 transition-colors ${
+                      className={`p-2 transition-colors flex flex-col items-center ${
                         hourEvents.length > 0 
                           ? 'bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50' 
                           : 'hover:bg-gray-50 dark:hover:bg-gray-700'
