@@ -33,7 +33,8 @@ export const MiniCalendar = ({
   onToggle,
   setShowDatePicker,
   setIsModalOpen,
-  resetForm
+  resetForm,
+  setSelectedDate
 }: MiniCalendarProps) => {
 
   // Obtiene el día de la semana en que comienza el mes (0 = domingo, 1 = lunes, etc.)
@@ -84,8 +85,9 @@ export const MiniCalendar = ({
 
           <button
             onClick={() => {
-              setShowDatePicker(true);
               setIsModalOpen(true);
+              setShowDatePicker(true);
+              setSelectedDate(null);
               resetForm();
             }}
             className="w-full mb-4 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"

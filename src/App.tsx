@@ -169,6 +169,7 @@ export default function App() {
         onClose={() => {
           closeModal();
           setShowDatePicker(false);
+          setSelectedDate(null);
           resetForm();
         }}
         selectedDate={selectedDate}

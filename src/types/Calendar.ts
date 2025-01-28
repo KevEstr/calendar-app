@@ -53,6 +53,7 @@ export interface MiniCalendarProps {
   setShowDatePicker: (show: boolean) => void;
   setIsModalOpen: (open: boolean) => void;
   resetForm: () => void;
+  setSelectedDate: (date: Date | null) => void;  // Add this line
 }
 
 // Props para la vista de mes, mostrando días y eventos del mes actual
@@ -73,6 +74,7 @@ export interface WeekViewProps {
   onEventClick: (event: Event) => void;
   onTimeSlotClick: (date: Date, hour: number) => void;
 }
+
 
 // Veriicar que días son festivos por medio de la API
 export type HolidayChecker = (dayNumber: number) => boolean;
