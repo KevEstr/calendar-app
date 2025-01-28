@@ -135,7 +135,7 @@ export const MiniCalendar = ({
                 >
                   {day}
                   {isHoliday && (
-                    <div className="hidden group-hover:block absolute bottom-full left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 p-2 rounded shadow-lg text-xs z-10 whitespace-nowrap text-gray-900 dark:text-gray-100">
+                    <div className="hidden group-hover:block absolute bottom-full left-0 bg-white dark:bg-gray-800 p-2 rounded shadow-lg text-xs z-10 w-[180px] text-left leading-tight text-gray-900 dark:text-gray-100">
                       {holidays.find(h => {
                         const holidayDate = new Date(h.date);
                         return holidayDate.getDate() === day && 

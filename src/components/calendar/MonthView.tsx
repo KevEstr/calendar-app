@@ -109,7 +109,7 @@ export const MonthView = ({ currentStoreDate, events, holidays, onDayClick, onEv
                   {isHoliday && (
                     <div className="group relative">
                       <Calendar className="w-3 h-3 md:w-4 md:h-4 text-red-500" />
-                      <div className="hidden group-hover:block absolute z-10 right-0 bg-white dark:bg-gray-800 p-2 rounded shadow-lg text-xs whitespace-nowrap dark:text-gray-200">
+                      <div className="hidden group-hover:block absolute z-10 left-0 bg-white dark:bg-gray-800 p-2 rounded shadow-lg text-xs w-[180px] text-left leading-tight dark:text-gray-200">
                       {holidays.find(h => {
                         const holidayDate = new Date(h.date);
                         return holidayDate.getDate() === day && 
