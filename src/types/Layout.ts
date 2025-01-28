@@ -23,4 +23,5 @@ export interface SidebarProps {
   setShowDatePicker: (show: boolean) => void;
   setIsModalOpen: (open: boolean) => void;
   resetForm: () => void;
+  setSelectedDate: (date: Date | null) => void;
 }

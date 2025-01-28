@@ -29,7 +29,8 @@ export const Sidebar = ({
   onNextMonth,
   setShowDatePicker,
   setIsModalOpen,
-  resetForm
+  resetForm,
+  setSelectedDate
 }: SidebarProps) => {
   const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
 
@@ -53,6 +54,7 @@ export const Sidebar = ({
         setShowDatePicker={setShowDatePicker}
         setIsModalOpen={setIsModalOpen}
         resetForm={resetForm}
+        setSelectedDate={setSelectedDate}
       />
 
       <div className="p-4 md:p-6 border-t border-gray-100 dark:border-gray-700">

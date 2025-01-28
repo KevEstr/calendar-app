@@ -53,7 +53,7 @@ export interface MiniCalendarProps {
   setShowDatePicker: (show: boolean) => void;
   setIsModalOpen: (open: boolean) => void;
   resetForm: () => void;
-  setSelectedDate: (date: Date | null) => void;  // Add this line
+  setSelectedDate: (date: Date | null) => void;
 }
 
 // Props para la vista de mes, mostrando días y eventos del mes actual

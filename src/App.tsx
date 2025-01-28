@@ -130,6 +130,7 @@ export default function App() {
             setShowDatePicker={setShowDatePicker}
             setIsModalOpen={openModal}
             resetForm={resetForm}
+            setSelectedDate={setSelectedDate}
           />
 
           {/* Sección principal que muestra la vista del calendario */}
