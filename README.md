@@ -9,6 +9,9 @@ Con una interfaz amigable y opciones de personalización, nos permite:
 - Saber que eventos han expirado debido a que ya se pasó de la fecha y/o hora de éste.
 - Tener controlado que no se añadan fechas incorrectas o pasadas del día actual, horas que se superponen o campos sin rellenar.
 
+La interfaz es responsive, se adapta a distintas pantallas y cuenta con **detección de modo oscuro y claro del navegador**, por lo que cambian los colores
+dependiendo de la configuración del cliente. La página cuenta con colores claros para modo claro en el navegador y colores oscuros para el modo noche.
+
 ---
 
 ## 🚀 Instrucciones para ejecutar el proyecto
@@ -72,6 +75,10 @@ Puedes visualizar el diseño de la aplicación en el siguiente enlace:
 
 [🔗 Diseño en Figma](https://www.figma.com/design/U0htWH1QMQ0xeRMU2iH68F/Untitled?node-id=0-1&m=dev&t=sY3CGqXgs9peBqks-1)
 
+Además, se desplegó la página web en la nube haciendo uso de Vercel para tener una mejor visualización del contenido creado:
+
+[🔗 Diseño Desplegado](https://calendar-app-nu-one.vercel.app/)
+
 ---
 
 ## 📂 Estructura del proyecto
@@ -83,6 +90,7 @@ Puedes visualizar el diseño de la aplicación en el siguiente enlace:
 │   ├── store/        # Gestión del estado global de la aplicación
 │   ├── utils/        # Helpers
 │   ├── types/        # Definiciones de estructuras de datos de la aplicación
+│   └── styles/       # Estilos y SASS con colores del calendario
 │   └── App.tsx       # Componente principal
 ├── public/           # Recursos estáticos
 ├── package.json      # Dependencias y scripts
